@@ -109,7 +109,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: "taosdata/.github"
-          ref: "main"
+          ref: "compat_branch"
           fetch-depth: 0
 
       - name: Debug env
@@ -168,3 +168,9 @@ jobs:
         run: python3 test_runner.py
         env:
           TEST_TYPE: "function"
+
+      - name: Run upgrade compatibility tests
+        if: matrix.platform == 'linux'
+        run: python3 test_runner.py
+        env:
+          TEST_TYPE: "upgrade_compat"
